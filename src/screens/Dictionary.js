@@ -55,7 +55,7 @@ function Dictionary() {
       </section>
     )
   }
-  const { id, name, status, rows } = dictionary
+  const { id, name, consistent, rows } = dictionary
 
   return (
     <section>
@@ -63,7 +63,7 @@ function Dictionary() {
       <div>
         <div>{id}</div>
         <div>{name}</div>
-        <div>{status}</div>
+        <div>Consistent: {consistent ? 'yes' : 'no'}</div>
       </div>
       <NewRow onNew={onNewRow} />
       <ul>
