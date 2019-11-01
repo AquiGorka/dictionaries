@@ -3,6 +3,7 @@ import styled from 'styled-components'
 const Input = styled.input`
   padding: 8px;
   font-size: 14px;
+  min-width: 50px;
 `
 
 const Ul = styled.ul`
@@ -46,4 +47,14 @@ const Section = styled.section`
   grid-gap: 16px;
 `
 
-export { Ul, Input, Button, DeleteButton, Section }
+const Breadcrumbs = styled.div`
+  padding-left: 8px;
+  font-weight: bold;
+  word-break: break-all;
+
+  @media (min-width: 640px) {
+    padding-left: 0;
+  }
+`
+
+export { Ul, Input, Button, DeleteButton, Section, Breadcrumbs }
