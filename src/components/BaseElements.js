@@ -8,6 +8,13 @@ const Ul = styled.ul`
   padding: 0;
   margin: 0;
   list-style: none;
+  & li:nth-child(2n + 1) {
+    background: #fafafa;
+  }
+
+  @media (min-width: 640px) {
+    border: 1px solid #eee;
+  }
 `
 
 const Button = styled.button`
@@ -18,4 +25,24 @@ const Button = styled.button`
   cursor: pointer;
 `
 
-export { Ul, Input, Button }
+const DeleteButton = styled(Button)`
+  height: 40px;
+  width: 40px;
+  color: white;
+  border: 1px solid rgba(167, 40, 40, 0.4);
+  color: rgba(167, 40, 40, 0.6);
+  background: transparent;
+  user-select: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 40px;
+  line-height: 0px;
+`
+
+const Section = styled.section`
+  display: grid;
+  grid-gap: 16px;
+`
+
+export { Ul, Input, Button, DeleteButton, Section }
