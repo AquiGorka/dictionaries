@@ -29,9 +29,9 @@ function Dictionaries() {
 function Item({ id, name, status }) {
   return (
     <li>
-      <div>id</div>
-      <div>name</div>
-      <div>status</div>
+      <div>{id}</div>
+      <div>{name}</div>
+      <div>{status}</div>
       <div>edit</div>
       <div>remove</div>
     </li>
