@@ -26,6 +26,13 @@ function Store({ children }) {
     }))
   }
 
+  const dictionariesDelete = id => {
+    setState(state => ({
+      ...state,
+      dictionaries: state.dictionaries.filter(d => d.id !== id),
+    }))
+  }
+
   useEffect(() => {
     const data = localStorage.getItem(DICTIONARIES)
     try {
@@ -51,7 +58,7 @@ function Store({ children }) {
   )
 
   return (
-    <Context.Provider value={{ state, dictionariesNew }}>
+    <Context.Provider value={{ state, dictionariesNew, dictionariesDelete }}>
       {children}
     </Context.Provider>
   )
