@@ -11,7 +11,6 @@ const Context = React.createContext()
 function Store({ children }) {
   const [state, setState] = useState({
     dictionaries: [],
-    dictionary: null,
   })
 
   const dictionariesNew = name => {
@@ -31,6 +30,14 @@ function Store({ children }) {
       ...state,
       dictionaries: state.dictionaries.filter(d => d.id !== id),
     }))
+  }
+
+  const dictionariesGet = id => {
+    const dictionary = state.dictionaries.find(d => d.id === id)
+    if (!dictionary) {
+      throw new Error('Dictionaries does not include item with provided id')
+    }
+    return dictionary
   }
 
   useEffect(() => {
@@ -58,7 +65,9 @@ function Store({ children }) {
   )
 
   return (
-    <Context.Provider value={{ state, dictionariesNew, dictionariesDelete }}>
+    <Context.Provider
+      value={{ state, dictionariesNew, dictionariesDelete, dictionariesGet }}
+    >
       {children}
     </Context.Provider>
   )
