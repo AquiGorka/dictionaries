@@ -5,10 +5,15 @@ function useDictionaries() {
   const {
     state: { dictionaries },
     dictionariesNew,
+    dictionariesDelete,
   } = useStore()
-  const onDelete = () => null
   const onEdit = () => null
-  return { dictionaries, onNew: dictionariesNew, onDelete, onEdit }
+  return {
+    dictionaries,
+    onNew: dictionariesNew,
+    onDelete: dictionariesDelete,
+    onEdit,
+  }
 }
 
 function Dictionaries() {
@@ -26,14 +31,18 @@ function Dictionaries() {
   )
 }
 
-function Item({ id, name, status }) {
+function Item({ id, name, status, onDelete }) {
+  const handleDelete = useCallback(() => onDelete(id), [id, onDelete])
+
   return (
     <li>
       <div>{id}</div>
       <div>{name}</div>
       <div>{status}</div>
       <div>edit</div>
-      <div>remove</div>
+      <div>
+        <button onClick={handleDelete}>X</button>
+      </div>
     </li>
   )
 }
