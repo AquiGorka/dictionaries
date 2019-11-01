@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import { useStore } from '../Store'
 import {
   Button,
+  Breadcrumbs,
   DeleteButton,
   Input,
   Section,
@@ -26,6 +27,7 @@ function Dictionaries() {
 
   return (
     <Section>
+      <Breadcrumbs>Dictionaries</Breadcrumbs>
       <NewDictionary onNew={onNew} />
       {!!dictionaries.length && (
         <Ul>
@@ -70,6 +72,7 @@ const Li = styled.li`
 const Name = styled.div`
   padding: 24px 0;
   padding-left: 8px;
+  word-break: break-all;
 
   @media (min-width: 640px) {
     padding-left: 0;
