@@ -3,11 +3,7 @@ import { Link } from 'react-router-dom'
 import { useStore } from '../Store'
 
 function useDictionaries() {
-  const {
-    state: { dictionaries },
-    dictionariesNew,
-    dictionariesDelete,
-  } = useStore()
+  const { dictionaries, dictionariesNew, dictionariesDelete } = useStore()
   const onEdit = () => null
   return {
     dictionaries,
