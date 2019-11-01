@@ -1,21 +1,21 @@
 {
   "files": {
     "main.css": "/dictionaries/static/css/main.2d3c51e4.chunk.css",
-    "main.js": "/dictionaries/static/js/main.f7a121d8.chunk.js",
-    "main.js.map": "/dictionaries/static/js/main.f7a121d8.chunk.js.map",
+    "main.js": "/dictionaries/static/js/main.355de007.chunk.js",
+    "main.js.map": "/dictionaries/static/js/main.355de007.chunk.js.map",
     "runtime-main.js": "/dictionaries/static/js/runtime-main.42fd44ee.js",
     "runtime-main.js.map": "/dictionaries/static/js/runtime-main.42fd44ee.js.map",
-    "static/js/2.b439bfa4.chunk.js": "/dictionaries/static/js/2.b439bfa4.chunk.js",
-    "static/js/2.b439bfa4.chunk.js.map": "/dictionaries/static/js/2.b439bfa4.chunk.js.map",
+    "static/js/2.80bdd66c.chunk.js": "/dictionaries/static/js/2.80bdd66c.chunk.js",
+    "static/js/2.80bdd66c.chunk.js.map": "/dictionaries/static/js/2.80bdd66c.chunk.js.map",
     "index.html": "/dictionaries/index.html",
-    "precache-manifest.e54a316211ea66814f103ece14958bf0.js": "/dictionaries/precache-manifest.e54a316211ea66814f103ece14958bf0.js",
+    "precache-manifest.1279f8402474fbd47ae9d81de5ff8d9e.js": "/dictionaries/precache-manifest.1279f8402474fbd47ae9d81de5ff8d9e.js",
     "service-worker.js": "/dictionaries/service-worker.js",
     "static/css/main.2d3c51e4.chunk.css.map": "/dictionaries/static/css/main.2d3c51e4.chunk.css.map"
   },
   "entrypoints": [
     "static/js/runtime-main.42fd44ee.js",
-    "static/js/2.b439bfa4.chunk.js",
+    "static/js/2.80bdd66c.chunk.js",
     "static/css/main.2d3c51e4.chunk.css",
-    "static/js/main.f7a121d8.chunk.js"
+    "static/js/main.355de007.chunk.js"
   ]
 }
