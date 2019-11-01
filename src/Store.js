@@ -1,6 +1,7 @@
-import React, { useState, useContext } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import uuid from 'uuid/v4'
 
+const DICTIONARIES = 'dictionaries'
 const STATUS = {
   EMPTY: 'empty',
 }
@@ -24,6 +25,30 @@ function Store({ children }) {
       dictionaries: [...state.dictionaries, newDictionary],
     }))
   }
+
+  useEffect(() => {
+    const data = localStorage.getItem(DICTIONARIES)
+    try {
+      if (data) {
+        const parsedData = JSON.parse(data) || []
+        if (!parsedData.length) {
+          return
+        }
+        setState(state => ({ ...state, dictionaries: parsedData }))
+      }
+    } catch (e) {
+      console.warn(
+        'There was an error reading/parsing the data from local storage',
+      )
+    }
+  }, [])
+
+  useEffect(
+    () => {
+      localStorage.setItem(DICTIONARIES, JSON.stringify(state.dictionaries))
+    },
+    [state.dictionaries],
+  )
 
   return (
     <Context.Provider value={{ state, dictionariesNew }}>
