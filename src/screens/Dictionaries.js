@@ -40,8 +40,11 @@ function Dictionaries() {
   )
 }
 
-function Item({ id, name, consistent, onDelete }) {
+function Item({ id, name, rows, consistent, onDelete }) {
   const handleDelete = useCallback(() => onDelete(id), [id, onDelete])
+  const waringTitle = !rows.length
+    ? 'Empty'
+    : rows.map(({ rowStatus }) => rowStatus).join(', ')
 
   return (
     <Li consistent={consistent}>
@@ -50,7 +53,7 @@ function Item({ id, name, consistent, onDelete }) {
       </Name>
       {!consistent && (
         <Warning>
-          <span role="img" aria-label="warning">
+          <span role="img" aria-label="warning" title={waringTitle}>
             ⚠️
           </span>
         </Warning>
