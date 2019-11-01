@@ -34,7 +34,7 @@ function useDictionary() {
   )
 
   // unmount
-  useEffect(() => () => dictionaryUnset(), [])
+  useEffect(() => () => dictionaryUnset(), [dictionaryUnset])
 
   return {
     dictionary,
