@@ -46,18 +46,17 @@ function Item({ id, name, consistent, onDelete }) {
       <Name as={Link} to={`/${id}`}>
         {name}
       </Name>
-      {!consistent && <NotConsistent />}
-      <DeleteButton onClick={handleDelete}>-</DeleteButton>
+      {!consistent && (
+        <Warning>
+          <span role="img" aria-label="warning">
+            ⚠️
+          </span>
+        </Warning>
+      )}
+      <DeleteButton onClick={handleDelete}>Delete</DeleteButton>
     </Li>
   )
 }
-
-const Name = styled.div`
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  padding: 24px 0;
-`
 
 const Li = styled.li`
   display: grid;
@@ -68,34 +67,22 @@ const Li = styled.li`
   padding: 0 8px;
 `
 
-function NotConsistent() {
-  return (
-    <Error>
-      <Cross>x</Cross>
-      <Info>Errors</Info>
-    </Error>
-  )
-}
+const Name = styled.div`
+  padding: 24px 0;
+  padding-left: 8px;
 
-const Error = styled.div`
-  border-radius: 4px;
+  @media (min-width: 640px) {
+    padding-left: 0;
+  }
+`
+
+const Warning = styled.span`
+  height: 40px;
   user-select: none;
   display: flex;
-  flex-direction: column;
-  height: 40px;
-  width: 40px;
-  border: 1px solid #eee;
   align-items: center;
   justify-content: center;
-  color: BBB;
-`
-
-const Cross = styled.div`
-  font-size: 20px;
-`
-
-const Info = styled.div`
-  font-size: 10px;
+  font-size: 16px;
 `
 
 function NewDictionary({ onNew }) {
@@ -126,7 +113,7 @@ function NewDictionary({ onNew }) {
         value={name}
         onChange={handleNameChange}
       />
-      <Button>Add new dictionary</Button>
+      <Button>Add</Button>
     </Form>
   )
 }
@@ -135,7 +122,7 @@ const Form = styled.form`
   display: grid;
   grid-template-columns: 1fr max-content;
   grid-gap: 16px;
-  padding: 4px;
+  padding: 8px;
 
   @media (min-width: 640px) {
     padding: 0;
