@@ -1,13 +1,7 @@
 import React from 'react'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
-
-function Dictionaries() {
-  return 'Dictionaries'
-}
-
-function Dictionary() {
-  return 'Dictionary'
-}
+import Dictionaries from './screens/Dictionaries'
+import Dictionary from './screens/Dictionary'
 
 function App() {
   return (
