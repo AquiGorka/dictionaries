@@ -2,7 +2,13 @@ import React, { useState, useCallback } from 'react'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 import { useStore } from '../Store'
-import { Ul, Input, Button } from '../components/BaseElements'
+import {
+  Button,
+  DeleteButton,
+  Input,
+  Section,
+  Ul,
+} from '../components/BaseElements'
 
 function useDictionaries() {
   const { dictionaries, dictionariesNew, dictionariesDelete } = useStore()
@@ -21,29 +27,16 @@ function Dictionaries() {
   return (
     <Section>
       <NewDictionary onNew={onNew} />
-      <List>
-        {dictionaries.map(item => (
-          <Item key={item.id} {...item} onDelete={onDelete} onEdit={onEdit} />
-        ))}
-      </List>
+      {!!dictionaries.length && (
+        <Ul>
+          {dictionaries.map(item => (
+            <Item key={item.id} {...item} onDelete={onDelete} onEdit={onEdit} />
+          ))}
+        </Ul>
+      )}
     </Section>
   )
 }
-
-const Section = styled.section`
-  display: grid;
-  grid-gap: 16px;
-`
-
-const List = styled(Ul)`
-  & li:nth-child(2n + 1) {
-    background: #fafafa;
-  }
-
-  @media (min-width: 640px) {
-    border: 1px solid #eee;
-  }
-`
 
 function Item({ id, name, consistent, onDelete }) {
   const handleDelete = useCallback(() => onDelete(id), [id, onDelete])
@@ -54,7 +47,7 @@ function Item({ id, name, consistent, onDelete }) {
         {name}
       </Name>
       {!consistent && <NotConsistent />}
-      <Remove onClick={handleDelete}>-</Remove>
+      <DeleteButton onClick={handleDelete}>-</DeleteButton>
     </Li>
   )
 }
@@ -75,21 +68,6 @@ const Li = styled.li`
   padding: 0 8px;
 `
 
-const Remove = styled(Button)`
-  height: 40px;
-  width: 40px;
-  color: white;
-  border: 1px solid rgba(167, 40, 40, 0.4);
-  color: rgba(167, 40, 40, 0.4);
-  background: transparent;
-  user-select: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 40px;
-  line-height: 0px;
-`
-
 function NotConsistent() {
   return (
     <Error>
@@ -100,6 +78,7 @@ function NotConsistent() {
 }
 
 const Error = styled.div`
+  border-radius: 4px;
   user-select: none;
   display: flex;
   flex-direction: column;
@@ -108,7 +87,7 @@ const Error = styled.div`
   border: 1px solid #eee;
   align-items: center;
   justify-content: center;
-  color: #AAA;
+  color: BBB;
 `
 
 const Cross = styled.div`
