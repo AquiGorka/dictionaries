@@ -15,8 +15,8 @@ function Layout({ children }) {
 const Header = styled.header`
   position: sticky;
   top: 0;
-  background: #719fce;
-  box-shadow: 0 -2px 5px 0px #efe6e6;
+  background: #877392;
+  box-shadow: 0 -2px 5px 0px #877392;
   padding: 12px;
 `
 
@@ -28,7 +28,7 @@ const H1 = styled.h1`
 const Main = styled.main`
   padding: 16px 0;
 
-  @media (min-width: 640px){
+  @media (min-width: 640px) {
     padding: 32px;
   }
 `
