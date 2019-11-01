@@ -4,6 +4,7 @@ import { useParams, Link } from 'react-router-dom'
 import { useStore, STATUS } from '../Store'
 import {
   Button,
+  Breadcrumbs,
   DeleteButton,
   Input,
   Section,
@@ -57,20 +58,21 @@ function Dictionary() {
 
   if (!dictionary) {
     return (
-      <section>
+      <Section>
+        <Breadcrumbs>
+          <Link to="/">Dictionaries</Link>
+        </Breadcrumbs>
         <p>Dictionary does not exist</p>
-        <Link to="/">Go back to dictionaries</Link>
-      </section>
+      </Section>
     )
   }
   const { name, consistent, rows } = dictionary
 
   return (
     <Section>
-      <Link to="/">/Dictionaries</Link>
-      <div>
-        <div>{name}</div>
-      </div>
+      <Breadcrumbs>
+        <Link to="/">Dictionaries</Link> / <span>{name}</span>
+      </Breadcrumbs>
       <NewRow onNew={onNewRow} />
       {!!rows.length && (
         <Ul>
@@ -87,11 +89,6 @@ function Dictionary() {
     </Section>
   )
 }
-
-const Info = styled.div`
-  color: rgb(167, 40, 40);
-  font-size: 12px;
-`
 
 function Item({ onEdit, onDelete, domain, range, rowId, rowStatus }) {
   const handleDomainChange = useCallback(
@@ -114,7 +111,7 @@ function Item({ onEdit, onDelete, domain, range, rowId, rowStatus }) {
   )
 
   return (
-    <Li error={rowStatus !== STATUS.OK}>
+    <Li>
       <Label>
         <Type>Domain</Type>
         <Field value={domain} onChange={handleDomainChange} />
@@ -123,56 +120,67 @@ function Item({ onEdit, onDelete, domain, range, rowId, rowStatus }) {
         <Type>Range</Type>
         <Field value={range} onChange={handleRangeChange} />
       </Label>
+      <Status>
+        {rowStatus === STATUS.OK ? (
+          <span role="img" aria-label="Ok" title="Ok">
+            👌
+          </span>
+        ) : rowStatus === STATUS.DUPLICATE ? (
+          <span role="img" aria-label="Duplicate" title="Duplicate">
+            ✌️
+          </span>
+        ) : rowStatus === STATUS.FORK ? (
+          <span role="img" aria-label="Fork" title="Fork">
+            🍴
+          </span>
+        ) : rowStatus === STATUS.CYCLE ? (
+          <span role="img" aria-label="Cycle" title="Cycle">
+            ➿
+          </span>
+        ) : rowStatus === STATUS.CHAIN ? (
+          <span role="img" aria-label="Chain" title="Chain">
+            🔗
+          </span>
+        ) : (
+          <span>a</span>
+        )}
+      </Status>
       <div>
-        <Error>{rowStatus}</Error>
-      </div>
-      <div>
-        <DeleteButton onClick={handleDelete}>-</DeleteButton>
+        <DeleteButton onClick={handleDelete}>Delete</DeleteButton>
       </div>
     </Li>
   )
 }
-
 const Li = styled.li`
   display: grid;
-  grid-template-columns: ${({ error }) =>
-    error ? '1fr 1fr auto auto' : '1fr 1fr auto auto'};
+  grid-template-columns: 1fr 1fr auto auto;
   grid-gap: 8px;
   align-items: center;
-  padding: 0 8px;
+  padding: 8px;
 `
-
 const Label = styled.div`
   display: grid;
   grid-template-rows: auto 1fr;
 `
-
-const Field = styled.input`
+const Field = styled(Input)`
   border: none;
-  background: none;
   border-bottom: 1px solid #ccc;
   padding: 4px;
+  min-width: 50px;
 `
-
 const Type = styled.div`
   font-size: 12px;
-  color: #ccc;
+  color: #777;
+  margin-bottom: 4px;
 `
-
-const Error = styled.div`
-  border-radius: 4px;
+const Status = styled.div`
+  height: 40px;
   user-select: none;
   display: flex;
-  flex-direction: column;
-  height: 40px;
-  width: 40px;
-  border: 1px solid #eee;
   align-items: center;
   justify-content: center;
-  border: #aaa;
-  color: #bbb;
+  font-size: 16px;
 `
-
 function NewRow({ onNew }) {
   const [domain, setDomain] = useState('')
   const [range, setRange] = useState('')
@@ -194,7 +202,6 @@ function NewRow({ onNew }) {
     },
     [domain, range, onNew],
   )
-
   return (
     <Form onSubmit={handleSubmit}>
       <Input
@@ -209,11 +216,10 @@ function NewRow({ onNew }) {
         value={range}
         onChange={handleRangeChange}
       />
-      <Button type="submit">Add new row</Button>
+      <Button type="submit">Add</Button>
     </Form>
   )
 }
-
 const Form = styled.form`
   display: grid;
   grid-template-columns: 1fr 1fr max-content;
@@ -224,5 +230,4 @@ const Form = styled.form`
     padding: 0;
   }
 `
-
 export default Dictionary
