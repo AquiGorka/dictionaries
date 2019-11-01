@@ -28,7 +28,7 @@ function Dictionaries() {
   )
 }
 
-function Item({ id, name, status, onDelete }) {
+function Item({ id, name, consistent, onDelete }) {
   const handleDelete = useCallback(() => onDelete(id), [id, onDelete])
 
   return (
@@ -37,8 +37,7 @@ function Item({ id, name, status, onDelete }) {
         <Link to={`/${id}`}>{id}</Link>
       </div>
       <div>{name}</div>
-      <div>{status}</div>
-      <div>edit</div>
+      <div>consistent: {consistent ? 'yes' : 'no'}</div>
       <div>
         <button onClick={handleDelete}>X</button>
       </div>
