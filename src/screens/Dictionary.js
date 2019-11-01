@@ -4,29 +4,26 @@ import { useStore } from '../Store'
 
 function useDictionary() {
   const { id } = useParams()
-  const { dictionariesGet } = useStore()
+  const {
+    state: { dictionaries },
+    dictionariesGet,
+  } = useStore()
   const [dictionary, setDictionary] = useState(null)
-  const [error, setError] = useState(false)
 
   useEffect(
     () => {
-      try {
-        const dictionary = dictionariesGet(id)
-        setDictionary(dictionary)
-      } catch (err) {
-        setError(true)
-      }
+      setDictionary(dictionariesGet(id))
     },
-    [id, dictionariesGet],
+    [id, dictionariesGet, dictionaries],
   )
 
-  return { dictionary, error }
+  return { dictionary }
 }
 
 function Dictionary() {
-  const { error, dictionary } = useDictionary()
+  const { dictionary } = useDictionary()
 
-  if (error) {
+  if (!dictionary) {
     return (
       <section>
         <p>Dictionary does not exist</p>
@@ -34,10 +31,16 @@ function Dictionary() {
       </section>
     )
   }
+  const { id, name, status } = dictionary
 
   return (
     <section>
       <Link to="/">Dictionaries</Link>
+      <div>
+        <div>{id}</div>
+        <div>{name}</div>
+        <div>{status}</div>
+      </div>
     </section>
   )
 }
