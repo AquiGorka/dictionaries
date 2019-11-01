@@ -66,7 +66,7 @@ function Dictionary() {
       </Section>
     )
   }
-  const { name, consistent, rows } = dictionary
+  const { name, rows } = dictionary
 
   return (
     <Section>
