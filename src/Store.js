@@ -27,16 +27,11 @@ function isThisACycle(item, arr) {
   return isThisACycle(loop, arr)
 }
 
-function computeDictionaryStatus(rows) {
-  // duplicates
-
-  // forks
-
-  // cycles
-
-  // chains
-
-  return STATUS.OK
+function updateConsistency(arr) {
+  return arr.map(item => ({
+    ...item,
+    consistent: item.rows.every(r => r.rowStatus === STATUS.OK) && item.rows.length,
+  }))
 }
 
 function updateRowsStatus(arr) {
@@ -95,7 +90,7 @@ function Store({ children }) {
     const newDictionary = {
       id: uuid(),
       name,
-      status: STATUS.EMPTY,
+      consistent: false,
       rows: [],
     }
     setDictionaries([...dictionaries, newDictionary])
@@ -135,7 +130,10 @@ function Store({ children }) {
     const updatedDictionariesWithUpdatedRows = updateRowsStatus(
       updatedDictionaries,
     )
-    setDictionaries(updatedDictionariesWithUpdatedRows)
+    const updatedDictionariesWithUpdatedRowsAndConsistency = updateConsistency(
+      updatedDictionariesWithUpdatedRows,
+    )
+    setDictionaries(updatedDictionariesWithUpdatedRowsAndConsistency)
 
     // side effect: update current
     setDictionary(updatedDictionary)
@@ -156,7 +154,10 @@ function Store({ children }) {
     const updatedDictionariesWithUpdatedRows = updateRowsStatus(
       updatedDictionaries,
     )
-    setDictionaries(updatedDictionariesWithUpdatedRows)
+    const updatedDictionariesWithUpdatedRowsAndConsistency = updateConsistency(
+      updatedDictionariesWithUpdatedRows,
+    )
+    setDictionaries(updatedDictionariesWithUpdatedRowsAndConsistency)
 
     // side effect: update current
     setDictionary(updatedDictionary)
@@ -179,37 +180,14 @@ function Store({ children }) {
     const updatedDictionariesWithUpdatedRows = updateRowsStatus(
       updatedDictionaries,
     )
-    setDictionaries(updatedDictionariesWithUpdatedRows)
+    const updatedDictionariesWithUpdatedRowsAndConsistency = updateConsistency(
+      updatedDictionariesWithUpdatedRows,
+    )
+    setDictionaries(updatedDictionariesWithUpdatedRowsAndConsistency)
 
     // side effect: update current
     setDictionary(updatedDictionary)
   }
-
-  const dictionaryUpdateStatus = () => {
-    let newStatus = STATUS.EMPTY
-    const { rows } = dictionary
-
-    if (rows.length) {
-      newStatus = computeDictionaryStatus()
-    }
-
-    if (dictionary.status === newStatus) {
-      return
-    }
-
-    //setDictionary(updatedDictionary)
-    //setDictionaries(
-    //dictionaries.map(d => (d.id === id ? updatedDictionary : d)),
-    //)
-  }
-
-  // when rows change update status
-  useEffect(
-    () => {
-      //dictionaryUpdateStatus()
-    },
-    [dictionary],
-  )
 
   // one time: load local storage data
   useEffect(() => {
