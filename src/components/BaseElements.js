@@ -2,6 +2,7 @@ import styled from 'styled-components'
 
 const Input = styled.input`
   padding: 8px;
+  font-size: 14px;
 `
 
 const Ul = styled.ul`
@@ -20,24 +21,24 @@ const Ul = styled.ul`
 const Button = styled.button`
   border-radius: 4px;
   padding: 8px
-  border: 1px solid #719fce;
-  background: rgba(113, 159, 206, 0.3);
+  border: 1px solid #45b748;
+  color: #45b748;
+  background: white;
   cursor: pointer;
+  font-size: 14px;
 `
 
 const DeleteButton = styled(Button)`
+  font-size: 12px;
   height: 40px;
-  width: 40px;
   color: white;
   border: 1px solid rgba(167, 40, 40, 0.4);
   color: rgba(167, 40, 40, 0.6);
-  background: transparent;
+  background: white;
   user-select: none;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 40px;
-  line-height: 0px;
 `
 
 const Section = styled.section`
