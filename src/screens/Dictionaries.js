@@ -1,4 +1,5 @@
 import React, { useState, useCallback } from 'react'
+import { Link } from 'react-router-dom'
 import { useStore } from '../Store'
 
 function useDictionaries() {
@@ -36,7 +37,9 @@ function Item({ id, name, status, onDelete }) {
 
   return (
     <li>
-      <div>{id}</div>
+      <div>
+        <Link to={`/${id}`}>{id}</Link>
+      </div>
       <div>{name}</div>
       <div>{status}</div>
       <div>edit</div>
